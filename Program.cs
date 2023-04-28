@@ -1,89 +1,80 @@
-﻿// Задача 38: Задайте массив вещественных чисел. Найдите разницу
-// между максимальным и минимальным элементов массива.
+﻿// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
 /*
-Console.Write("Введите размер массива: ");
-int size = int.Parse(Console.ReadLine()); 
+using System;
 
-double[] myArray = new double[size]; 
-
-for (int i = 0; i < size; i++)
+class Program
 {
-    Console.Write("Введите " + (i + 1) + "-й элемент массива: ");
-    myArray[i] = double.Parse(Console.ReadLine());
-}
-
-double min = myArray[0]; 
-double max = myArray[0]; 
-
-for (int i = 1; i < myArray.Length; i++)
-{
-    if (myArray[i] < min)
+    static int BolseNulya(int[] array, int size)
     {
-        min = myArray[i];
+        int count = 0;
+        for (int i = 0; i < size; i++)
+        {
+            if (array[i] > 0)
+            {
+                count++;
+            }
+        }
+        return count;
     }
-    if (myArray[i] > max)
+
+    static void ShowArray(int[] array)
     {
-        max = myArray[i];
+        for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write(array[i] + " ");
+        }
+        Console.WriteLine();
     }
-}
 
-double diff = max - min; 
-Console.WriteLine($"Разница между максимальным {max} и минимальным элементом {min} вещественных чисел: " + diff);
-*/
-// Задача 36: Задайте одномерный массив, заполненный случайными числами. 
-// Найдите сумму элементов, стоящих на нечётных позициях.
-/*
-int size = 10;
-Random rnd = new Random();
-
-double[] myArray = new double[size];
-for (int i = 0; i < size; i++)
-{
-    myArray[i] = rnd.NextDouble() * 10;
-}
-
-Console.Write("Массив: ");
-for (int i = 0; i < size; i++)
-{
-    Console.Write(myArray[i] + " ");
-}
-Console.WriteLine();
-
-double sum = 0;
-for (int i = 1; i < size; i += 2)
-{
-    sum += myArray[i];
-}
-
-Console.WriteLine("Сумма элементов, стоящих на нечетных позициях: " + sum);
-*/
-// Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами.
-// Напишите программу, которая покажет количество чётных чисел в массиве.
-/*
-int size = 10;
-Random rnd = new Random();
-
-int[] myArray = new int[size];
-for (int i = 0; i < size; i++)
-{
-    myArray[i] = rnd.Next(100, 1000);
-}
-
-Console.Write("Массив: ");
-for (int i = 0; i < size; i++)
-{
-    Console.Write(myArray[i] + " ");
-}
-Console.WriteLine();
-
-int count = 0;
-for (int i = 0; i < size; i++)
-{
-    if (myArray[i] % 2 == 0)
+    static void Main()
     {
-        count++;
+        Console.WriteLine("Введите размер массива: ");
+        int size = Convert.ToInt32(Console.ReadLine());
+
+        int[] array = new int[size];
+        Random rnd = new Random();
+        for (int i = 0; i < size; i++)
+        {
+            array[i] = rnd.Next(-10, 11);
+        }
+
+        Console.Write("Массив: ");
+        ShowArray(array);
+
+        int count = BolseNulya(array, size);
+        Console.WriteLine($"Количество чисел > нуля - {count}");
     }
 }
-
-Console.WriteLine("Количество четных чисел в массиве: " + count);
 */
+//Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
+//заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
+//значения b1, k1, b2 и k2 задаются пользователем.
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите значение k1: ");
+        int k1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Введите значение b1: ");
+        int b1 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Введите значение k2: ");
+        int k2 = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Введите значение b2: ");
+        int b2 = Convert.ToInt32(Console.ReadLine());
+
+        double x = (double)(b2 - b1) / (k1 - k2);
+        double y = k1 * x + b1;
+
+        Console.WriteLine($"Точка пересечения: ({x}, {y})");
+    }
+
+    static double peresechenie(int k1, int b1, int k2, int b2)
+    {
+        return (double)(b2 - b1) / (k1 - k2);
+    }
+}
