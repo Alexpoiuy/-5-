@@ -1,80 +1,101 @@
-﻿// Задача 41: Пользователь вводит с клавиатуры M чисел. Посчитайте, сколько чисел больше 0 ввёл пользователь.
+﻿//Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+/*
+int m = 3;
+int n = 4;
+double[,] myArray = new double[m, n];
+
+Random rand = new Random();
+
+for (int i = 0; i < m; i++)
+{
+    for (int j = 0; j < n; j++)
+    {
+        myArray[i, j] = rand.NextDouble();
+        myArray[i, j] = Math.Round(myArray[i, j], 2);
+        Console.Write(myArray[i, j] + " ");
+    }
+    Console.WriteLine();
+}
+*/
+//Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
+// и возвращает значение этого элемента или же указание, что такого элемента нет.
 /*
 using System;
 
 class Program
 {
-    static int BolseNulya(int[] array, int size)
+    static void Main(string[] args)
     {
-        int count = 0;
-        for (int i = 0; i < size; i++)
+        int m = 3;
+        int n = 4;
+
+        double[,] myArray = new double[m, n];
+
+        Random rand = new Random();
+    
+        for (int i = 0; i < m; i++)
         {
-            if (array[i] > 0)
+            for (int j = 0; j < n; j++)
             {
-                count++;
+                myArray[i, j] = rand.NextDouble();
             }
         }
-        return count;
-    }
 
-    static void ShowArray(int[] array)
-    {
-        for (int i = 0; i < array.Length; i++)
+        Console.Write("Введите номер строки элемента: ");
+        int rowIndex = int.Parse(Console.ReadLine());
+        Console.Write("Введите номер столбца элемента: ");
+        int colIndex = int.Parse(Console.ReadLine());
+
+        if (rowIndex < 0  rowIndex >= m  colIndex < 0 || colIndex >= n)
         {
-            Console.Write(array[i] + " ");
+            Console.WriteLine("Элемент с такими позициями не существует.");
         }
-        Console.WriteLine();
-    }
-
-    static void Main()
-    {
-        Console.WriteLine("Введите размер массива: ");
-        int size = Convert.ToInt32(Console.ReadLine());
-
-        int[] array = new int[size];
-        Random rnd = new Random();
-        for (int i = 0; i < size; i++)
+        else
         {
-            array[i] = rnd.Next(-10, 11);
+            Console.WriteLine($"Значение элемента: {myArray[rowIndex, colIndex]}");
         }
 
-        Console.Write("Массив: ");
-        ShowArray(array);
-
-        int count = BolseNulya(array, size);
-        Console.WriteLine($"Количество чисел > нуля - {count}");
+        Console.ReadKey();
     }
 }
 */
-//Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, 
-//заданных уравнениями y = k1 * x + b1, y = k2 * x + b2; 
-//значения b1, k1, b2 и k2 задаются пользователем.
+//Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 using System;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.WriteLine("Введите значение k1: ");
-        int k1 = Convert.ToInt32(Console.ReadLine());
+        int m = 3;
+        int n = 4;
 
-        Console.WriteLine("Введите значение b1: ");
-        int b1 = Convert.ToInt32(Console.ReadLine());
+        int[,] myArray = new int[m, n];
 
-        Console.WriteLine("Введите значение k2: ");
-        int k2 = Convert.ToInt32(Console.ReadLine());
+        Random rand = new Random();
 
-        Console.WriteLine("Введите значение b2: ");
-        int b2 = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Исходный массив:");
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                myArray[i, j] = rand.Next(1, 10);
+                Console.Write($"{myArray[i, j]} ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
 
-        double x = (double)(b2 - b1) / (k1 - k2);
-        double y = k1 * x + b1;
+        for (int j = 0; j < n; j++)
+        {
+            int sum = 0;
+            for (int i = 0; i < m; i++)
+            {
+                sum += myArray[i, j];
+            }
+            double average = (double)sum / m;
+            Console.WriteLine($"Среднее арифметическое элементов в столбце {j + 1}: {average}");
+        }
 
-        Console.WriteLine($"Точка пересечения: ({x}, {y})");
-    }
-
-    static double peresechenie(int k1, int b1, int k2, int b2)
-    {
-        return (double)(b2 - b1) / (k1 - k2);
+        Console.ReadKey();
     }
 }
