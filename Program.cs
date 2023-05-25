@@ -1,101 +1,251 @@
-﻿//Задача 47. Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
+﻿
 /*
-int m = 3;
-int n = 4;
-double[,] myArray = new double[m, n];
+Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит 
+по убыванию элементы каждой строки двумерного массива.
 
-Random rand = new Random();
-
-for (int i = 0; i < m; i++)
+int[,] CreateRandom2DArray(int rows, int columns, int minValue, int maxValue)
 {
-    for (int j = 0; j < n; j++)
+    int[,] array = new int[rows, columns];
+    
+    for(int i = 0; i < rows; i++)
+        for(int j = 0; j < columns; j++)
+            array[i, j] = new Random().Next(minValue, maxValue + 1);
+    return array;
+}
+
+void Show2DArray(int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
     {
-        myArray[i, j] = rand.NextDouble();
-        myArray[i, j] = Math.Round(myArray[i, j], 2);
-        Console.Write(myArray[i, j] + " ");
-    }
+        for(int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i, j] + " ");
+        Console.WriteLine();
+    }  
     Console.WriteLine();
 }
+
+void OtBolKMen(int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+        {
+            for(int g = 0; g < array.GetLength(1) - 1; g++)
+            {
+                 if(array[i,g] < array[i, g + 1]) 
+                 {
+                    int temp = array[i, g + 1];
+                    array[i, g + 1] = array[i, g];
+                    array[i, g] = temp;
+                 }
+            }
+           
+        }
+    }            
+}
+
+
+
+Console.WriteLine("Введите количество строк: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите нижний предел: ");
+int minValue = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите верхний предел: ");
+int maxValue = Convert.ToInt32(Console.ReadLine());
+
+int[,] myArray = CreateRandom2DArray(rows, columns, minValue, maxValue);
+Show2DArray(myArray);
+OtBolKMen(myArray);
+Show2DArray(myArray);
 */
-//Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
-// и возвращает значение этого элемента или же указание, что такого элемента нет.
+
+// Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, 
+//которая будет находить строку с наименьшей суммой элементов.
 /*
-using System;
-
-class Program
+int[,] CreateRandom2DArray(int rows, int columns, int minValue, int maxValue)
 {
-    static void Main(string[] args)
-    {
-        int m = 3;
-        int n = 4;
-
-        double[,] myArray = new double[m, n];
-
-        Random rand = new Random();
+    int[,] array = new int[rows, columns];
     
-        for (int i = 0; i < m; i++)
+    for(int i = 0; i < rows; i++)
+        for(int j = 0; j < columns; j++)
+            array[i, j] = new Random().Next(minValue, maxValue + 1);
+    return array;
+}
+
+void Show2DArray(int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i, j] + " ");
+        Console.WriteLine();
+    }  
+    Console.WriteLine();
+}
+
+void NumberRow(int[,] array)
+{
+    int minRow = 0;
+    int minSumRow = 0; 
+    int sumRow = 0; 
+    for (int i = 0; i < array.GetLength(1); i++) 
+    { 
+        minRow += array[0, i]; 
+    } 
+    for (int i = 0; i < array.GetLength(0); i++) 
+    { 
+        for (int j = 0; j < array.GetLength(1); j++) 
+        sumRow += array[i, j]; 
+        if (sumRow < minRow) 
+        { 
+            minRow = sumRow; 
+            minSumRow = i; 
+        } 
+        sumRow = 0; 
+        }
+        Console.Write($"{minSumRow + 1} строка с наименьшей суммой элементов");
+}
+
+Console.WriteLine("Введите количество строк: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите нижний предел: ");
+int minValue = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите верхний предел: ");
+int maxValue = Convert.ToInt32(Console.ReadLine());
+
+int[,] myArray = CreateRandom2DArray(rows, columns, minValue, maxValue);
+Show2DArray(myArray);
+NumberRow(myArray);
+*/
+
+// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+/*
+int[,] CreateRandom2DArray(int rows, int columns, int minValue, int maxValue)
+{
+    int[,] array = new int[rows, columns];
+    
+    for(int i = 0; i < rows; i++)
+        for(int j = 0; j < columns; j++)
+            array[i, j] = new Random().Next(minValue, maxValue + 1);
+    return array;
+}
+
+
+void Show2DArray(int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i++)
+    {
+        for(int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i, j] + " ");
+        Console.WriteLine();
+    }  
+    Console.WriteLine();
+}
+
+void MultiplyMatrix(int[,] myArray, int[,] myArray2, int[,] resultMatrix)
+{
+    for (int i = 0; i < resultMatrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < resultMatrix.GetLength(1); j++)
         {
-            for (int j = 0; j < n; j++)
-            {
-                myArray[i, j] = rand.NextDouble();
+            int sum = 0; 
+            for (int k = 0; k < myArray.GetLength(1); k++) 
+            { 
+                sum += myArray[i,k] * myArray2[k,j]; 
             }
-        }
-
-        Console.Write("Введите номер строки элемента: ");
-        int rowIndex = int.Parse(Console.ReadLine());
-        Console.Write("Введите номер столбца элемента: ");
-        int colIndex = int.Parse(Console.ReadLine());
-
-        if (rowIndex < 0  rowIndex >= m  colIndex < 0 || colIndex >= n)
-        {
-            Console.WriteLine("Элемент с такими позициями не существует.");
-        }
-        else
-        {
-            Console.WriteLine($"Значение элемента: {myArray[rowIndex, colIndex]}");
-        }
-
-        Console.ReadKey();
+            resultMatrix[i,j] = sum; 
+        } 
     }
+}
+
+Console.WriteLine("Введите количество строк 1 матрицы: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов 1 матрицы: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите нижний предел 1 матрицы: ");
+int minValue = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите верхний предел 1 матрицы: ");
+int maxValue = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество строк 2 матрицы: ");
+int rows2 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов 2 матрицы: ");
+int columns2 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите нижний предел 2 матрицы: ");
+int minValue2 = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите верхний предел 2 матрицы: ");
+int maxValue2 = Convert.ToInt32(Console.ReadLine());
+
+int[,] myArray = CreateRandom2DArray(rows, columns, minValue, maxValue);
+Show2DArray(myArray);
+int[,] myArray2 = CreateRandom2DArray(rows2, columns2, minValue2, maxValue2);
+Show2DArray(myArray2);
+if (columns != rows2)
+{
+    Console.WriteLine("Умножение матриц невозможно. Количество столбцов первой матрицы должно быть равно количеству строк второй матрицы.");
+}
+else
+{
+    int[,] resultMatrix = new int[rows, columns2];
+    MultiplyMatrix(myArray, myArray2, resultMatrix);
+    Show2DArray(resultMatrix);
 }
 */
-//Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
-using System;
 
-class Program
+//Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
+//Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+
+/*
+int[,,] CreateRandom3DArray(int rows, int columns, int three, int minValue, int maxValue)
 {
-    static void Main(string[] args)
-    {
-        int m = 3;
-        int n = 4;
+    int[,,] array = new int[rows, columns, three];
+    bool[] usedNumbers = new bool[90]; 
+    Random random = new Random();
 
-        int[,] myArray = new int[m, n];
-
-        Random rand = new Random();
-
-        Console.WriteLine("Исходный массив:");
-        for (int i = 0; i < m; i++)
-        {
-            for (int j = 0; j < n; j++)
+    for(int i = 0; i < rows; i++)
+        for(int j = 0; j < columns; j++)
+            for(int k = 0; k < three; k++)
             {
-                myArray[i, j] = rand.Next(1, 10);
-                Console.Write($"{myArray[i, j]} ");
+                int number;
+                do
+                {
+                    number = random.Next(minValue, maxValue + 1);
+                } 
+                while (usedNumbers[number - 10]);
+                array[i, j, k] = number;
+                usedNumbers[number - 10] = true;
             }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-
-        for (int j = 0; j < n; j++)
-        {
-            int sum = 0;
-            for (int i = 0; i < m; i++)
-            {
-                sum += myArray[i, j];
-            }
-            double average = (double)sum / m;
-            Console.WriteLine($"Среднее арифметическое элементов в столбце {j + 1}: {average}");
-        }
-
-        Console.ReadKey();
-    }
+    return array;
 }
+
+void Show3DArray(int[,,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                for (int k = 0; k < array.GetLength(2); k++)
+                {
+                    Console.WriteLine($"array[{i}][{j}][{k}]: {array[i, j, k]}");
+                }
+            }
+        }
+}
+
+Console.WriteLine("Введите количество строк: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов: ");
+int columns = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество 3 измерение: ");
+int three = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите нижний предел: ");
+int minValue = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите верхний предел: ");
+int maxValue = Convert.ToInt32(Console.ReadLine());
+
+int[,,] myArray = CreateRandom3DArray(rows, columns, three, minValue, maxValue);
+Show3DArray(myArray);
+*/
